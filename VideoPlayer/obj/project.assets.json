@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus  f712\\Documents\\GitHub projects\\wpf-video-player\\VideoPlayer\\VideoPlayer.csproj",
+      "projectUniqueName": "C:\\Users\\Asus  f712\\Documents\\GitHub projects\\WPFvideoplayer\\VideoPlayer\\VideoPlayer.csproj",
       "projectName": "VideoPlayer",
-      "projectPath": "C:\\Users\\Asus  f712\\Documents\\GitHub projects\\wpf-video-player\\VideoPlayer\\VideoPlayer.csproj",
+      "projectPath": "C:\\Users\\Asus  f712\\Documents\\GitHub projects\\WPFvideoplayer\\VideoPlayer\\VideoPlayer.csproj",
       "packagesPath": "C:\\Users\\Asus  f712\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus  f712\\Documents\\GitHub projects\\wpf-video-player\\VideoPlayer\\obj\\",
+      "outputPath": "C:\\Users\\Asus  f712\\Documents\\GitHub projects\\WPFvideoplayer\\VideoPlayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
