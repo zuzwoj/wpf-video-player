@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Title="Subtitle Composer" Height="800" Width="1280" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="Main.ico">
     <Grid>
-        <Menu Name="Menu">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Name="Menu" Grid.Row="0">
             <MenuItem Header="File">
                 <MenuItem Header="Open" Click="MenuItem_Open"/>
                 <MenuItem Header="Exit" Click="MenuItem_Exit"/>
@@ -17,6 +23,34 @@
             </MenuItem>
         </Menu>
         <MediaElement Name="Player" LoadedBehavior="Manual" UnloadedBehavior="Stop" Height="700" MouseLeftButtonDown="ClickVideo"
-         MediaOpened="Element_MediaOpened" MediaEnded="Element_MediaEnded" MouseWheel="MouseWheelFunc"/>
+         MediaOpened="Element_MediaOpened" MediaEnded="Element_MediaEnded" MouseWheel="MouseWheelFunc" Grid.Row="1"/>
+        <Slider Grid.Row="2" Name="SliderTime" VerticalAlignment="Center" ValueChanged="SeekToMediaPosition" Thumb.DragStarted="DurationSlider_DragStarted"
+            Thumb.DragCompleted="DurationSlider_DragCompleted" Margin="5"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button Margin="3" Click="OnMouseDownPlayMedia">
+                <Image Source="Resources\Play.png" Height="20" Width="20"/>
+            </Button>
+            <Button Margin="3" Click="OnMouseDownPauseMedia">
+                <Image Source="Resources\Pause.png" Height="20" Width="20"/>
+            </Button>
+            <Button Margin="3" Click="OnMouseDownStopMedia">
+                <Image Source="Resources\stop.png" Height="20" Width="20"/>
+            </Button>
+            <Button Margin="3" Click="OnMouseDownPrevMedia">
+                <Image Source="Resources\Prev.png" Height="20" Width="20"/>
+            </Button>
+            <Button Margin="3" Click="OnMouseDownNextMedia">
+                <Image Source="Resources\Next.png" Height="20" Width="20"/>
+            </Button>
+            <Label Name="Duration" Content="00:00:00.000" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Volume"/>
+            <ProgressBar  Name="SliderVolume" Width="70" Height="14" Margin="3" MouseDown="SliderVolume_Click"/>
+            <Button Margin="3" Click="OnMouseDownMuteMedia">
+                <Image Source="Resources\Mute.png" Height="20" Width="20"/>
+            </Button>
+            <Label Width="30"/>
+            <Label Content="Playback speed"/>
+            <ComboBox/>
+        </StackPanel>
     </Grid>
 </Window>
