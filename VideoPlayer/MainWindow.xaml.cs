@@ -25,6 +25,7 @@ namespace Wpf
     public partial class MainWindow : Window
     {
         private bool isPlaying = false;
+        private bool isMuted = false;
         public delegate void timerTick();
         DispatcherTimer ticks = new DispatcherTimer();
         timerTick tick;
@@ -82,6 +83,33 @@ namespace Wpf
             ticks.Start();
             if (skipLength > Player.NaturalDuration.TimeSpan) skipLength = Player.NaturalDuration.TimeSpan;
         }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch ((sender as ComboBox).SelectedIndex)
+            {
+                case 0:
+                    Player.SpeedRatio = 0.1;
+                    break;
+                case 1:
+                    Player.SpeedRatio = 0.25;
+                    break;
+                case 2:
+                    Player.SpeedRatio = 0.5;
+                    break;
+                case 3:
+                    Player.SpeedRatio = 1;
+                    break;
+                case 4:
+                    Player.SpeedRatio = 1.5;
+                    break;
+                case 5:
+                    Player.SpeedRatio = 2;
+                    break;
+                case 6:
+                    Player.SpeedRatio = 4;
+                    break;
+            }
+        }
         void ticks_Tick(object sender, object e) { Dispatcher.Invoke(tick); }
         void SliderVolume_Click(object sender, MouseButtonEventArgs args)
         {
@@ -135,7 +163,17 @@ namespace Wpf
         }
         void OnMouseDownMuteMedia(object sender, RoutedEventArgs args)
         {
-
+            if (isMuted)
+            {
+                Img.Source = new BitmapImage(new Uri(@"/VideoPlayer;component/Resources/Mute.png", UriKind.Relative));
+                Player.Volume = 1;
+            }
+            else 
+            {
+                Img.Source = new BitmapImage(new Uri(@"/VideoPlayer;component/Resources/Unmute.png", UriKind.Relative));
+                Player.Volume = 0;
+            }
+            isMuted = !isMuted;
         }
     }
 }

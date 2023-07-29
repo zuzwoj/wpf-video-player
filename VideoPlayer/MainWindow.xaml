@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf"
         mc:Ignorable="d"
-        Title="Subtitle Composer" Height="800" Width="1280" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="Main.ico">
+        Title="Video Player" Height="800" Width="1280" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="Main.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -46,11 +46,19 @@
             <Label Content="Volume"/>
             <ProgressBar  Name="SliderVolume" Width="70" Height="14" Margin="3" MouseDown="SliderVolume_Click"/>
             <Button Margin="3" Click="OnMouseDownMuteMedia">
-                <Image Source="Resources\Mute.png" Height="20" Width="20"/>
+                <Image Name="Img" Source="Resources\Mute.png" Height="20" Width="20"/>
             </Button>
             <Label Width="30"/>
             <Label Content="Playback speed"/>
-            <ComboBox/>
+            <ComboBox SelectedIndex="3" Width="70" SelectionChanged="ComboBox_SelectionChanged" Height="20">
+                <ComboBoxItem>10%</ComboBoxItem>
+                <ComboBoxItem>25%</ComboBoxItem>
+                <ComboBoxItem>50%</ComboBoxItem>
+                <ComboBoxItem>100%</ComboBoxItem>
+                <ComboBoxItem>150%</ComboBoxItem>
+                <ComboBoxItem>200%</ComboBoxItem>
+                <ComboBoxItem>400%</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
     </Grid>
 </Window>
