@@ -18,6 +18,18 @@
                 <MenuItem Header="Open" Click="MenuItem_Open"/>
                 <MenuItem Header="Exit" Click="MenuItem_Exit"/>
             </MenuItem>
+            <MenuItem Header="Settings">
+                <MenuItem Header="Language">
+                    <MenuItem IsCheckable="true" IsChecked="true" Header="English"/>
+                    <MenuItem IsCheckable="true" Header="German"/>
+                    <MenuItem IsCheckable="true" Header="Polish"/>
+                </MenuItem>
+                <MenuItem Header="Theme">
+                    <MenuItem IsCheckable="true" IsChecked="true" Header="Light"/>
+                    <MenuItem IsCheckable="true" Header="Dark"/>
+                    <MenuItem IsCheckable="true" Header="Otter"/>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Click="MenuItem_About"/>
             </MenuItem>
