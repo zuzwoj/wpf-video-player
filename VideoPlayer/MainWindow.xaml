@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf"
         mc:Ignorable="d"
         Title="Video Player" Height="800" Width="1280" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="Main.ico">
-    <Grid>
+    <Grid Style="{DynamicResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -25,9 +25,9 @@
                     <MenuItem IsCheckable="true" Header="polski"/>
                 </MenuItem>
                 <MenuItem Header="Theme">
-                    <MenuItem IsCheckable="true" IsChecked="true" Header="Light"/>
-                    <MenuItem IsCheckable="true" Header="Dark"/>
-                    <MenuItem IsCheckable="true" Header="Otter"/>
+                    <MenuItem IsCheckable="true" IsChecked="true" Header="Light" Click="LightThemeSelected"/>
+                    <MenuItem IsCheckable="true" Header="Dark" Click="DarkThemeSelected"/>
+                    <MenuItem IsCheckable="true" Header="Otter" Click="OtterThemeSelected"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
@@ -54,14 +54,14 @@
             <Button Margin="3" Click="OnMouseDownNextMedia">
                 <Image Source="Resources\Next.png" Height="20" Width="20"/>
             </Button>
-            <Label Name="Duration" Content="00:00:00.000" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Volume"/>
+            <Label Name="Duration" Content="00:00:00.000" VerticalAlignment="Center" Width="120" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="Volume" Style="{DynamicResource LabelStyle}"/>
             <ProgressBar  Name="SliderVolume" Width="70" Height="14" Margin="3" MouseDown="SliderVolume_Click"/>
             <Button Margin="3" Click="OnMouseDownMuteMedia">
                 <Image Name="Img" Source="Resources\Mute.png" Height="20" Width="20"/>
             </Button>
             <Label Width="30"/>
-            <Label Content="Playback speed"/>
+            <Label Content="Playback speed" Style="{DynamicResource LabelStyle}"/>
             <ComboBox SelectedIndex="3" Width="70" SelectionChanged="ComboBox_SelectionChanged" Height="20">
                 <ComboBoxItem>10%</ComboBoxItem>
                 <ComboBoxItem>25%</ComboBoxItem>

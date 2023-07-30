@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -16,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
+using System.Windows.Markup;
 
 namespace Wpf
 {
@@ -26,6 +29,7 @@ namespace Wpf
     {
         private bool isPlaying = false;
         private bool isMuted = false;
+        private string path = Directory.GetCurrentDirectory();
         public delegate void timerTick();
         DispatcherTimer ticks = new DispatcherTimer();
         timerTick tick;
@@ -35,6 +39,7 @@ namespace Wpf
             InitializeComponent();
             SliderVolume.Value = SliderVolume.Maximum;
             tick = new timerTick(changeStatus);
+            path = path.Substring(0, path.Length - 25);
         }
         void changeStatus()
         {
@@ -46,10 +51,8 @@ namespace Wpf
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Video files (*.webm;*.gif;*.gifv;*.avi;*.amv;*.mp4;*.m4p;*.m4v;*.mpg;*.mp2;*.mpeg;*.mpe;*.mpv;*.mpg;*.mpeg;*.m2v)|" +
                 "*.webm;*.gif;*.gifv;*.avi;*.amv;*.mp4;*.m4p;*.m4v;*.mpg;*.mp2;*.mpeg;*.mpe;*.mpv;*.mpg;*.mpeg;*.m2v";
-            if ((bool)openFileDialog.ShowDialog())
-            {
-                Player.Source = new Uri(openFileDialog.FileName);
-            }
+            bool? status = openFileDialog.ShowDialog();
+            if (status is not null && status is true) Player.Source = new Uri(openFileDialog.FileName);
         }
         private void SeekToMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
@@ -61,6 +64,40 @@ namespace Wpf
             }
         }
         private void MenuItem_Exit(object sender, EventArgs e) { Close(); }
+        private void LightThemeSelected(object sender, EventArgs e) 
+        {
+            var stream = new FileStream(path + @"/Themes/Light/Light.xaml", FileMode.Open);
+            foreach (DictionaryEntry dictionaryEntry in (ResourceDictionary)XamlReader.Load(stream)) Application.Current.Resources[dictionaryEntry.Key] = dictionaryEntry.Value;
+            MenuItem itemChecked = (MenuItem)sender;
+            foreach (MenuItem item in ((MenuItem)itemChecked.Parent).Items)
+            {
+                if (item == itemChecked) continue;
+                item.IsChecked = false;
+            }
+        }
+        private void DarkThemeSelected(object sender, EventArgs e)
+        {
+            var stream = new FileStream(path + @"/Themes/Dark/Dark.xaml", FileMode.Open);
+            foreach (DictionaryEntry dictionaryEntry in (ResourceDictionary)XamlReader.Load(stream)) Application.Current.Resources[dictionaryEntry.Key] = dictionaryEntry.Value;
+            MenuItem itemChecked = (MenuItem)sender;
+            foreach (MenuItem item in ((MenuItem)itemChecked.Parent).Items)
+            {
+                if (item == itemChecked) continue;
+                item.IsChecked = false;
+            }
+        }
+        private void OtterThemeSelected(object sender, EventArgs e)
+        {
+            var stream = new FileStream(path + @"/Themes/Otter/Otter.xaml", FileMode.Open);
+            foreach (DictionaryEntry dictionaryEntry in (ResourceDictionary)XamlReader.Load(stream)) Application.Current.Resources[dictionaryEntry.Key] = dictionaryEntry.Value;
+            MenuItem itemChecked = (MenuItem)sender;
+            foreach (MenuItem item in ((MenuItem)itemChecked.Parent).Items)
+            {
+                if (item == itemChecked) continue;
+                item.IsChecked = false;
+            }
+        }
+
         private void MenuItem_About(object sender, EventArgs e) { MessageBox.Show("A simple video player", "About", MessageBoxButton.OK); }
         void ClickVideo(object sender, RoutedEventArgs args)
         {
@@ -81,13 +118,13 @@ namespace Wpf
             SliderVolume.Minimum = 0;
             SliderVolume.Maximum = 100;
             ticks.Interval = TimeSpan.FromMilliseconds(1);
-            ticks.Tick += ticks_Tick;
+            ticks.Tick += ticks_Tick!;
             ticks.Start();
             if (skipLength > Player.NaturalDuration.TimeSpan) skipLength = Player.NaturalDuration.TimeSpan;
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch ((sender as ComboBox).SelectedIndex)
+            switch (((ComboBox)sender).SelectedIndex)
             {
                 case 0:
                     Player.SpeedRatio = 0.1;

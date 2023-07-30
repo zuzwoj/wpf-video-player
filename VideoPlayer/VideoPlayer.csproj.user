@@ -10,5 +10,14 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\Dark\Dark.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Light\Light.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Otter\Otter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>
