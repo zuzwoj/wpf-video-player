@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf"
+        xmlns:p = "clr-namespace:VideoPlayer.Properties"
         mc:Ignorable="d"
-        Title="Video Player" Height="800" Width="1280" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="Main.ico">
+        Title="{x:Static p:Resources.Title}" Height="800" Width="1280" MinHeight="480" MinWidth="640" WindowStartupLocation="CenterScreen" Icon="Main.ico">
     <Grid Style="{DynamicResource GridStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,24 +15,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu Name="Menu" Grid.Row="0">
-            <MenuItem Header="File">
-                <MenuItem Header="Open" Click="MenuItem_Open"/>
-                <MenuItem Header="Exit" Click="MenuItem_Exit"/>
+            <MenuItem Header="{x:Static p:Resources.File_Menu}">
+                <MenuItem Header="{x:Static p:Resources.Open_MenuItem}" Click="MenuItem_Open"/>
+                <MenuItem Header="{x:Static p:Resources.Exit_MenuItem}" Click="MenuItem_Exit"/>
             </MenuItem>
-            <MenuItem Header="Settings">
-                <MenuItem Header="Language">
-                    <MenuItem IsCheckable="true" IsChecked="true" Header="English"/>
-                    <MenuItem IsCheckable="true" Header="Deutsch"/>
-                    <MenuItem IsCheckable="true" Header="polski"/>
+            <MenuItem Header="{x:Static p:Resources.Settings_Menu}">
+                <MenuItem Name="testname" Header="{x:Static p:Resources.Language_Menu}">
+                    <MenuItem IsCheckable="true" IsChecked="true" Header="English" Click="EnglishSelected"/>
+                    <MenuItem IsCheckable="true" Header="Deutsch" Click="GermanSelected"/>
+                    <MenuItem IsCheckable="true" Header="polski" Click="PolishSelected"/>
                 </MenuItem>
-                <MenuItem Header="Theme">
-                    <MenuItem IsCheckable="true" IsChecked="true" Header="Light" Click="LightThemeSelected"/>
-                    <MenuItem IsCheckable="true" Header="Dark" Click="DarkThemeSelected"/>
-                    <MenuItem IsCheckable="true" Header="Otter" Click="OtterThemeSelected"/>
+                <MenuItem Header="{x:Static p:Resources.Theme_Menu}">
+                    <MenuItem IsCheckable="true" IsChecked="true" Header="{x:Static p:Resources.Light_MenuItem}" Click="LightThemeSelected"/>
+                    <MenuItem IsCheckable="true" Header="{x:Static p:Resources.Dark_MenuItem}" Click="DarkThemeSelected"/>
+                    <MenuItem IsCheckable="true" Header="{x:Static p:Resources.Otter_MenuItem}" Click="OtterThemeSelected"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Help">
-                <MenuItem Header="About" Click="MenuItem_About"/>
+            <MenuItem Header="{x:Static p:Resources.Help_Menu}">
+                <MenuItem Header="{x:Static p:Resources.About_MenuItem}" Click="MenuItem_About"/>
             </MenuItem>
         </Menu>
         <MediaElement Name="Player" LoadedBehavior="Manual" UnloadedBehavior="Stop" Height="700" MouseLeftButtonDown="ClickVideo"
@@ -55,13 +56,13 @@
                 <Image Source="Resources\Next.png" Height="20" Width="20"/>
             </Button>
             <Label Name="Duration" Content="00:00:00.000" VerticalAlignment="Center" Width="120" Style="{DynamicResource LabelStyle}"/>
-            <Label Content="Volume" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="{x:Static p:Resources.Volume}" Style="{DynamicResource LabelStyle}"/>
             <ProgressBar  Name="SliderVolume" Width="70" Height="14" Margin="3" MouseDown="SliderVolume_Click"/>
             <Button Margin="3" Click="OnMouseDownMuteMedia">
                 <Image Name="Img" Source="Resources\Mute.png" Height="20" Width="20"/>
             </Button>
             <Label Width="30"/>
-            <Label Content="Playback speed" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="{x:Static p:Resources.Playback_Speed}" Style="{DynamicResource LabelStyle}"/>
             <ComboBox SelectedIndex="3" Width="70" SelectionChanged="ComboBox_SelectionChanged" Height="20">
                 <ComboBoxItem>10%</ComboBoxItem>
                 <ComboBoxItem>25%</ComboBoxItem>

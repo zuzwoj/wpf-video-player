@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
 using System.Windows.Markup;
+using System.Reflection;
+using System.Resources;
 
 namespace Wpf
 {
@@ -29,6 +31,8 @@ namespace Wpf
     {
         private bool isPlaying = false;
         private bool isMuted = false;
+        private string title = "About";
+        private string desc = "A simple video player";
         private string path = Directory.GetCurrentDirectory();
         public delegate void timerTick();
         DispatcherTimer ticks = new DispatcherTimer();
@@ -97,8 +101,47 @@ namespace Wpf
                 item.IsChecked = false;
             }
         }
+        private void EnglishSelected(object sender, EventArgs e)
+        {
+            title = "About";
+            desc = "A simple video editor";
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+            MainWindow newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
+            ((MenuItem)newWindow.testname.Items[0]).IsChecked = true;
+            ((MenuItem)newWindow.testname.Items[1]).IsChecked = false;
+            ((MenuItem)newWindow.testname.Items[2]).IsChecked = false;
+        }
+        private void GermanSelected(object sender, EventArgs e)
+        {
+            title = "Über die App";
+            desc = "Ein einfacher Videoplayer";
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
+            MainWindow newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
+            ((MenuItem)newWindow.testname.Items[0]).IsChecked = false;
+            ((MenuItem)newWindow.testname.Items[1]).IsChecked = true;
+            ((MenuItem)newWindow.testname.Items[2]).IsChecked = false;
+        }
+        private void PolishSelected(object sender, EventArgs e)
+        {
+            title = "O programie";
+            desc = "Prosty odtwarzacz filmów";
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("pl-PL");
+            MainWindow newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
+            ((MenuItem)newWindow.testname.Items[0]).IsChecked = false;
+            ((MenuItem)newWindow.testname.Items[1]).IsChecked = false;
+            ((MenuItem)newWindow.testname.Items[2]).IsChecked = true;
+        }
 
-        private void MenuItem_About(object sender, EventArgs e) { MessageBox.Show("A simple video player", "About", MessageBoxButton.OK); }
+        private void MenuItem_About(object sender, EventArgs e) { MessageBox.Show(desc, title, MessageBoxButton.OK); } 
         void ClickVideo(object sender, RoutedEventArgs args)
         {
             if (isPlaying)
