@@ -21,8 +21,8 @@
             <MenuItem Header="Settings">
                 <MenuItem Header="Language">
                     <MenuItem IsCheckable="true" IsChecked="true" Header="English"/>
-                    <MenuItem IsCheckable="true" Header="German"/>
-                    <MenuItem IsCheckable="true" Header="Polish"/>
+                    <MenuItem IsCheckable="true" Header="Deutsch"/>
+                    <MenuItem IsCheckable="true" Header="polski"/>
                 </MenuItem>
                 <MenuItem Header="Theme">
                     <MenuItem IsCheckable="true" IsChecked="true" Header="Light"/>

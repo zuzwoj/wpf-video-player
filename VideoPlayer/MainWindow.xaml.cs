@@ -44,6 +44,8 @@ namespace Wpf
         private void MenuItem_Open(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Video files (*.webm;*.gif;*.gifv;*.avi;*.amv;*.mp4;*.m4p;*.m4v;*.mpg;*.mp2;*.mpeg;*.mpe;*.mpv;*.mpg;*.mpeg;*.m2v)|" +
+                "*.webm;*.gif;*.gifv;*.avi;*.amv;*.mp4;*.m4p;*.m4v;*.mpg;*.mp2;*.mpeg;*.mpe;*.mpv;*.mpg;*.mpeg;*.m2v";
             if ((bool)openFileDialog.ShowDialog())
             {
                 Player.Source = new Uri(openFileDialog.FileName);
@@ -115,7 +117,7 @@ namespace Wpf
         {
             Point coord = args.GetPosition(SliderVolume);
             SliderVolume.Value = (coord.X / 70) * 100;
-            Player.Volume = (double)SliderVolume.Value / 100;
+            if(!isMuted) Player.Volume = (double)SliderVolume.Value / 100;
         }
         private void Element_MediaEnded(object sender, EventArgs e) { Player.Stop(); }
         private void DurationSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
@@ -166,7 +168,7 @@ namespace Wpf
             if (isMuted)
             {
                 Img.Source = new BitmapImage(new Uri(@"/VideoPlayer;component/Resources/Mute.png", UriKind.Relative));
-                Player.Volume = 1;
+                Player.Volume = (double)SliderVolume.Value / 100;
             }
             else 
             {
